@@ -23,12 +23,12 @@
               "src/assets",
               {
                 "glob": "index.js",
-                "input": "./server/",
+                "input": "src/server/",
                 "output": "./"
               },
               {
                 "glob": "package.json",
-                "input": "./server/",
+                "input": "src/server/",
                 "output": "./"
               }
             ],
