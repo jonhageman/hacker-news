@@ -1,10 +1,18 @@
-<mat-list>
-  <h3 mat-subheader>Best Stories</h3>
-  <mat-list-item *ngFor="let item of newsItems">
-    <h4 mat-line>
-      <a href="{{item.url}}">{{item.title}}</a>
-    </h4>
-    <p mat-line>{{item.time | date}}</p>
-    <p mat-line>By: {{item.by}}</p>
-  </mat-list-item>
-</mat-list>
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title mb-0">
+      <i class="fa fa-chevron-down"></i> Best Stories</h5>
+  </div>
+  <div class="card-body">
+    <ul class="list-unstyled">
+      <li *ngFor="let item of newsItems" class="media">
+        <div class="media-body">
+          <h5 class="mb-1">
+            <a href="{{item.url}}" target="_blank">{{item.title}}</a>
+          </h5>
+          <p>{{item.time | date}}, By: {{item.by}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
