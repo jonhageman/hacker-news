@@ -1,16 +1,35 @@
+<div *ngIf="newsErrMsg" class="alert alert-danger">Error retrieving news items. {{ newsErrMsg }}</div>
 <div class="card">
   <div class="card-header">
     <h5 class="card-title mb-0">
       <i class="fa fa-chevron-down"></i> Best Stories</h5>
   </div>
   <div class="card-body">
-    <ul class="list-unstyled">
+    <div *ngIf="isLoading" class="text-center">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!isLoading && !newsItems">
+      <p>No news items found.</p>
+    </div>
+    <ul *ngIf="!isLoading && newsItems" class="list-unstyled">
       <li *ngFor="let item of newsItems" class="media">
         <div class="media-body">
-          <h5 class="mb-1">
+
+          <h5 class="mb-0">
             <a href="{{item.url}}" target="_blank">{{item.title}}</a>
           </h5>
-          <p>{{item.time | date}}, By: {{item.by}}</p>
+          <div>
+            <span *ngIf="item.time" class="text-muted">{{item.time | date}}</span>
+            <span *ngIf="item.by"> |
+              <a routerLink="/author/{{item.by}}">{{item.by}}</a>
+
+            </span>
+            <span *ngIf="item.kids"> |
+              <a routerLink="{{item.id}}">
+                <i class="fa fa-comment"></i> {{item.kids.length}} comments</a>
+            </span>
+          </div>
+          <hr class="my-1">
         </div>
       </li>
     </ul>

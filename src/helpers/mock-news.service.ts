@@ -17,7 +17,8 @@ export class MockNewsService {
     score: 0,
     title: 'news story title',
     parts: [],
-    descendeants: 0
+    descendeants: 0,
+    comments: []
   };
 
   newsItemIds: number[] = [1, 2, 3, 4, 5];

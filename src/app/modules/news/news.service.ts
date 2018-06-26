@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { NewsItem } from './news-item';
-import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,11 @@ export class NewsService {
 
   getNewsItem(id: number): Observable<NewsItem> {
     return this.http.get<NewsItem>(`${this.newsItemUrl}/${id}.json`).pipe(
-      tap(newsItem => (newsItem.time = newsItem.time * 1000)),
+      tap(newsItem => {
+        if (newsItem) {
+          newsItem.time = newsItem.time ? newsItem.time * 1000 : null;
+        }
+      }),
       catchError(this.handleError<any>('getNewsItem'))
     );
   }

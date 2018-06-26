@@ -1,0 +1,24 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/">&lt; Back to Best Stories</a>
+    </li>
+  </ol>
+</nav>
+<div *ngIf="itemErrMsg" class="alert alert-danger">{{itemErrMsg}}</div>
+<div *ngIf="isLoading" class="text-center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading && !newsItem">
+  <p>News item not found.</p>
+</div>
+<div *ngIf="!isLoading && newsItem">
+  <h2>
+    <a href="{{newsItem.url}}" target="_blank">{{newsItem.title}}</a>
+  </h2>
+  <h5>
+    Author:
+    <a routerLink="/author/{{newsItem.by}}">{{newsItem.by}}</a>
+  </h5>
+  <app-comment-list *ngIf="newsItem.comments" [comments]="newsItem.comments"></app-comment-list>
+</div>

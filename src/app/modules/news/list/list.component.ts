@@ -11,6 +11,7 @@ export class ListComponent implements OnInit {
   newsIds: number[];
   newsItems: Array<NewsItem> = [];
   newsErrMsg: string;
+  isLoading = false;
   constructor(private newsService: NewsService) {}
 
   ngOnInit() {
@@ -18,15 +19,23 @@ export class ListComponent implements OnInit {
   }
 
   private getTopTenBestStories() {
+    this.isLoading = true;
     this.newsErrMsg = '';
-    this.newsService.getBestStories().subscribe(newsIds => {
-      this.newsIds = newsIds;
-      for (let i = 0; i < 10; i++) {
-        this.newsService.getNewsItem(this.newsIds[i]).subscribe(item => {
-          this.newsItems.push(item);
-          console.log(item);
-        });
+    this.newsService.getBestStories().subscribe(
+      newsIds => {
+        this.newsIds = newsIds;
+        for (let i = 0; i < 10; i++) {
+          this.newsService.getNewsItem(this.newsIds[i]).subscribe(item => {
+            this.isLoading = false;
+            this.newsItems.push(item);
+            // console.log(item);
+          });
+        }
+      },
+      error => {
+        this.isLoading = false;
+        this.newsErrMsg = error;
       }
-    }, error => (this.newsErrMsg = error));
+    );
   }
 }
