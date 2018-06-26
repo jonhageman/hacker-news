@@ -14,4 +14,5 @@ export class NewsItem {
   title: string;
   parts: number[];
   descendeants: number;
+  comments: NewsItem[];
 }

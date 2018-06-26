@@ -1,0 +1,13 @@
+<div *ngIf="comments">
+  <p>
+    <em>Comments</em>
+  </p>
+  <hr>
+  <blockquote class="blockquote" *ngFor="let comment of comments">
+    <h5>Comment by:
+      <strong>{{comment.by}}</strong>
+    </h5>
+    <div [innerHTML]="comment.text"></div>
+    <hr>
+  </blockquote>
+</div>

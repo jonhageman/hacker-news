@@ -15,7 +15,7 @@ describe('NewsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [NewsService]
+      providers: [NewsService, HttpClient]
     });
 
     httpTestingController = TestBed.get(HttpTestingController);
@@ -63,7 +63,8 @@ describe('NewsService', () => {
         score: 0,
         title: 'news story title',
         parts: [],
-        descendeants: 0
+        descendeants: 0,
+        comments: []
       };
 
       newsService
