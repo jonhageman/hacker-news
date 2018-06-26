@@ -36,12 +36,20 @@ export class AuthorComponent implements OnInit {
           this.author = author;
 
           if (author.submitted) {
-            for (const storyId of author.submitted) {
-              this.newsService.getNewsItem(storyId).subscribe(story => {
-                if (!story.deleted && story.type && story.type === 'story') {
-                  this.stories.push(story);
-                }
-              });
+            for (let i = 0; i < 10; i++) {
+              if (author.submitted[i]) {
+                this.newsService
+                  .getNewsItem(author.submitted[i])
+                  .subscribe(story => {
+                    if (
+                      !story.deleted &&
+                      story.type &&
+                      story.type === 'story'
+                    ) {
+                      this.stories.push(story);
+                    }
+                  });
+              }
             }
             // console.log(this.stories);
             this.isLoading = false;

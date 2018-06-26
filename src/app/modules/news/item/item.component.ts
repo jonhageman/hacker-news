@@ -32,14 +32,16 @@ export class ItemComponent implements OnInit {
           this.newsItem = item;
           this.newsItem.comments = [];
           if (this.newsItem.kids) {
-            for (const commentId of item.kids) {
-              if (commentId) {
-                this.newsService.getNewsItem(commentId).subscribe(comment => {
-                  if (comment && !comment.deleted) {
-                    // console.log(comment);
-                    this.newsItem.comments.push(comment);
-                  }
-                });
+            for (let i = 0; i < 10; i++) {
+              if (item.kids[i]) {
+                this.newsService
+                  .getNewsItem(item.kids[i])
+                  .subscribe(comment => {
+                    if (comment && !comment.deleted) {
+                      // console.log(comment);
+                      this.newsItem.comments.push(comment);
+                    }
+                  });
               }
             }
             this.isLoading = false;
